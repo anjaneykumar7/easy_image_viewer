@@ -17,6 +17,7 @@ class EasyImageViewPager extends StatefulWidget {
   final EasyImageProvider easyImageProvider;
   final PageController pageController;
   final bool doubleTapZoomable;
+  final ValueChanged<int>? onPageChanged;
 
   /// Callback for when the scale has changed, only invoked at the end of
   /// an interaction.
@@ -30,6 +31,7 @@ class EasyImageViewPager extends StatefulWidget {
       required this.easyImageProvider,
       required this.pageController,
       this.doubleTapZoomable = false,
+       this.onPageChanged,
       this.onScaleChanged})
       : super(key: key);
 
@@ -49,6 +51,7 @@ class _EasyImageViewPagerState extends State<EasyImageViewPager> {
       key: GlobalObjectKey(widget.easyImageProvider),
       itemCount: widget.easyImageProvider.imageCount,
       controller: widget.pageController,
+      onPageChanged:widget.onPageChanged,
       scrollBehavior: MouseEnabledScrollBehavior(),
       itemBuilder: (context, index) {
         final image = widget.easyImageProvider.imageBuilder(context, index);
